@@ -1,0 +1,16 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Static { xpos = 2560, ypos = 1200, width = 2380, height = 15}
+       , commands = [ Run Weather "YBCG" ["-t"," <tempC>C","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red", "-t", "CPU: <autototal>"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %b %_d %l:%M" "date" 10
+                    , Run StdinReader
+                    , Run DiskIO [("/", "<read> <write>")] [] 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ Disk: %diskio% | %multicpu% | %memory% * %swap%           <fc=#ee9a00>%date%</fc> | %YBCG%"
+       }
